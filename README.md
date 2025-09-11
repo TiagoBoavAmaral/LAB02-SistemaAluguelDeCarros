@@ -2,6 +2,6 @@
 
 DISCIPLINA: LABORATÓRIO DE DESENVOLVIMENTO DE SOFTWARE
 
-Alunos: Tiago Boaventura Amaral e Kayque Allan
+Alunos: Tiago Boaventura Amaral e Kayque Allan Ribeiro Freitas
 
 Professor: João Paulo Carneiro Aramuni
