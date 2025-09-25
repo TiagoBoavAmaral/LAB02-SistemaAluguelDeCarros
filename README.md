@@ -4,25 +4,25 @@
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.1.5-success?style=for-the-badge&logo=spring)
 ![Maven](https://img.shields.io/badge/Maven-4.0.0-red?style=for-the-badge&logo=apache-maven)
 
-[cite_start]Este projeto é um sistema web para apoiar a gestão de aluguéis de automóveis, permitindo que clientes solicitem aluguéis e que agentes da empresa avaliem e processem esses pedidos[cite: 6]. [cite_start]O sistema foi desenvolvido como parte do Laboratório de Desenvolvimento de Software da PUC Minas[cite: 2, 4].
+Este projeto é um sistema web para apoiar a gestão de aluguéis de automóveis, permitindo que clientes solicitem aluguéis e que agentes da empresa avaliem e processem esses pedidos[cite: 6]. O sistema foi desenvolvido como parte do Laboratório de Desenvolvimento de Software da PUC Minas[cite: 2, 4].
 
 ## 📋 Funcionalidades
 
 O protótipo atual implementa o fluxo principal do sistema, incluindo:
 
-* [cite_start]**Autenticação e Autorização**: O sistema requer cadastro prévio [cite: 9] [cite_start]e possui dois níveis de acesso distintos: **Cliente** e **Agente**[cite: 10, 11].
-* [cite_start]**Gestão de Pedidos pelo Cliente**: Usuários do tipo "Cliente" podem criar, modificar, consultar e cancelar seus pedidos de aluguel[cite: 10].
-* [cite_start]**Avaliação de Pedidos pelo Agente**: Usuários do tipo "Agente" (representando empresas ou bancos) podem visualizar todos os pedidos pendentes e realizar a análise financeira para aprová-los ou rejeitá-los[cite: 11, 12].
-* [cite_start]**Persistência de Dados**: O sistema armazena informações sobre contratantes (clientes), automóveis e os próprios pedidos de aluguel[cite: 13, 15].
+* **Autenticação e Autorização**: O sistema requer cadastro prévio [cite: 9] e possui dois níveis de acesso distintos: **Cliente** e **Agente**[cite: 10, 11].
+* **Gestão de Pedidos pelo Cliente**: Usuários do tipo "Cliente" podem criar, modificar, consultar e cancelar seus pedidos de aluguel[cite: 10].
+* **Avaliação de Pedidos pelo Agente**: Usuários do tipo "Agente" (representando empresas ou bancos) podem visualizar todos os pedidos pendentes e realizar a análise financeira para aprová-los ou rejeitá-los[cite: 11, 12].
+* **Persistência de Dados**: O sistema armazena informações sobre contratantes (clientes), automóveis e os próprios pedidos de aluguel[cite: 13, 15].
 
 ## 🛠️ Tecnologias Utilizadas
 
-[cite_start]Este projeto foi construído utilizando as seguintes tecnologias, conforme a especificação do projeto[cite: 24]:
+Este projeto foi construído utilizando as seguintes tecnologias, conforme a especificação do projeto[cite: 24]:
 
 * **Backend**:
     * Java 17+
     * Spring Boot 3.1.5
-    * [cite_start]Spring MVC [cite: 24]
+    * Spring MVC [cite: 24]
     * Spring Security (para autenticação e autorização)
     * Spring Data JPA / Hibernate (para persistência de dados)
 * **Frontend**:
@@ -100,7 +100,7 @@ Para inspecionar os dados diretamente:
 
 ## 🏛️ Estrutura do Projeto
 
-[cite_start]O código está organizado seguindo as camadas da arquitetura MVC[cite: 24], conforme a especificação do projeto:
+O código está organizado seguindo as camadas da arquitetura MVC[cite: 24], conforme a especificação do projeto:
 
 * `com.pucminas.rental_system.config`: Configurações de segurança (Spring Security).
 * `com.pucminas.rental_system.controller`: Classes que recebem as requisições web.
