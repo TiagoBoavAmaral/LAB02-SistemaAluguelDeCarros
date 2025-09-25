@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <title>Pedidos Pendentes</title>
+  </head>
+  <body>
+    <h1>Pedidos Pendentes para Avaliação</h1>
+    <p>Agente: <span sec:authentication="name"></span></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Carro</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="pedido : ${pedidos}">
+          <td th:text="${pedido.id}"></td>
+          <td th:text="${pedido.cliente.nome}"></td>
+          <td
+            th:text="${pedido.automovel.marca} + ' ' + ${pedido.automovel.modelo}"
+          ></td>
+          <td>
+            <form
+              th:action="@{/pedidos/evaluate}"
+              method="post"
+              style="display: inline"
+            >
+              <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
+              <button type="submit" name="aprovar" value="true">Aprovar</button>
+            </form>
+            <form
+              th:action="@{/pedidos/evaluate}"
+              method="post"
+              style="display: inline"
+            >
+              <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
+              <button type="submit" name="aprovar" value="false">
+                Rejeitar
+              </button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sair" />
+    </form>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Novo Pedido</title>
+  </head>
+  <body>
+    <h1>Criar Novo Pedido de Aluguel</h1>
+    <form th:action="@{/pedidos/new}" method="post">
+      <label for="automovel">Selecione um Carro:</label>
+      <select id="automovel" name="automovelId">
+        <option
+          th:each="auto : ${automoveis}"
+          th:value="${auto.id}"
+          th:text="${auto.marca} + ' ' + ${auto.modelo} + ' - ' + ${auto.placa}"
+        ></option>
+      </select>
+      <br /><br />
+      <button type="submit">Enviar Pedido</button>
+    </form>
+    <br />
+    <a th:href="@{/pedidos/mine}">Voltar para Meus Pedidos</a>
+  </body>
+</html>

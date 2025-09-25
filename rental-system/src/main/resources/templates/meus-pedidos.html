@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <title>Meus Pedidos</title>
+  </head>
+  <body>
+    <h1>Meus Pedidos de Aluguel</h1>
+    <p>Bem-vindo, <span sec:authentication="name"></span>!</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Carro</th>
+          <th>Data</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="pedido : ${pedidos}">
+          <td th:text="${pedido.id}"></td>
+          <td
+            th:text="${pedido.automovel.marca} + ' ' + ${pedido.automovel.modelo}"
+          ></td>
+          <td
+            th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')}"
+          ></td>
+          <td th:text="${pedido.status}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <a th:href="@{/pedidos/new}">Fazer Novo Pedido</a>
+    <br /><br />
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sair" />
+    </form>
+  </body>
+</html>
