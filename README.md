@@ -45,7 +45,6 @@ Para executar este projeto em sua máquina local, siga os passos abaixo.
 
 1.  **Clone o repositório** (ou certifique-se de ter a pasta do projeto em sua máquina).
     ```bash
-    # Exemplo:
     git clone https://github.com/TiagoBoavAmaral/LAB02-SistemaAluguelDeCarros.git
     ```
 
