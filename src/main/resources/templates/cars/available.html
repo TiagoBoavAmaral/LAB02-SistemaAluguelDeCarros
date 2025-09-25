@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: html}">
+<head>
+    <title>Carros Disponíveis - Sistema de Aluguel de Carros</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="h3">
+                    <i class="bi bi-car-front me-2"></i>
+                    Carros Disponíveis
+                </h1>
+                <p class="text-muted">Encontre o carro perfeito para sua viagem</p>
+            </div>
+        </div>
+        
+        <!-- Search and Filters -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-funnel me-2"></i>
+                            Filtros de Busca
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="get" action="/cars">
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="brand" class="form-label">Marca</label>
+                                    <input type="text" class="form-control" id="brand" name="brand" 
+                                           th:value="${brand}" placeholder="Ex: Toyota">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="model" class="form-label">Modelo</label>
+                                    <input type="text" class="form-control" id="model" name="model_param" 
+                                           th:value="${model}" placeholder="Ex: Corolla">
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="year" class="form-label">Ano</label>
+                                    <input type="number" class="form-control" id="year" name="year" 
+                                           th:value="${year}" min="2000" max="2024" placeholder="2020">
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="maxRate" class="form-label">Diária Máxima</label>
+                                    <input type="number" class="form-control" id="maxRate" name="maxRate" 
+                                           th:value="${maxRate}" min="0" step="0.01" placeholder="100.00">
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label class="form-label">&nbsp;</label>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-search me-2"></i>
+                                            Buscar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>
+                        <span th:text="${cars.size()}">0</span> carros encontrados
+                    </h5>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <input type="radio" class="btn-check" name="viewMode" id="gridView" autocomplete="off" checked>
+                        <label class="btn btn-outline-secondary" for="gridView">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                        </label>
+                        <input type="radio" class="btn-check" name="viewMode" id="listView" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="listView">
+                            <i class="bi bi-list"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- No results -->
+        <div th:if="${cars.empty}" class="row">
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="bi bi-car-front text-muted" style="font-size: 4rem;"></i>
+                    <h4 class="mt-3">Nenhum carro encontrado</h4>
+                    <p class="text-muted">Tente ajustar os filtros de busca ou remover alguns critérios.</p>
+                    <a href="/cars/available" class="btn btn-primary">
+                        <i class="bi bi-arrow-clockwise me-2"></i>
+                        Ver Todos os Carros
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Grid View -->
+        <div id="gridViewContainer" th:unless="${cars.empty}">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4" th:each="car : ${cars}">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-light">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="card-title mb-0" th:text="${car.brand + ' ' + car.model}"></h6>
+                                <span class="badge bg-success">Disponível</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <small class="text-muted">Ano</small><br>
+                                    <strong th:text="${car.year}"></strong>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Placa</small><br>
+                                    <strong th:text="${car.licensePlate}"></strong>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3" th:if="${car.color != null}">
+                                <div class="col-6">
+                                    <small class="text-muted">Cor</small><br>
+                                    <span th:text="${car.color}"></span>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Proprietário</small><br>
+                                    <span th:text="${car.ownerType.name() == 'COMPANY' ? 'Empresa' : 
+                                                     car.ownerType.name() == 'BANK' ? 'Banco' : 'Cliente'}"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mb-3" th:if="${car.dailyRate != null}">
+                                <h4 class="text-primary mb-0">
+                                    <span th:text="${'R$ ' + #numbers.formatDecimal(car.dailyRate, 1, 2)}"></span>
+                                    <small class="text-muted">/dia</small>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-grid gap-2">
+                                <a th:href="@{/cars/{id}(id=${car.id})}" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-eye me-2"></i>
+                                    Ver Detalhes
+                                </a>
+                                <a th:href="@{/orders/new(carId=${car.id})}" 
+                                   class="btn btn-primary btn-sm"
+                                   th:if="${isClient}">
+                                    <i class="bi bi-plus-circle me-2"></i>
+                                    Alugar Agora
+                                </a>
+                                <a href="/login" 
+                                   class="btn btn-primary btn-sm"
+                                   th:unless="${isAuthenticated}">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                                    Faça Login para Alugar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- List View -->
+        <div id="listViewContainer" class="d-none" th:unless="${cars.empty}">
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Carro</th>
+                                <th>Ano</th>
+                                <th>Placa</th>
+                                <th>Cor</th>
+                                <th>Diária</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="car : ${cars}">
+                                <td>
+                                    <strong th:text="${car.brand + ' ' + car.model}"></strong><br>
+                                    <small class="text-muted" th:text="${car.registration}"></small>
+                                </td>
+                                <td th:text="${car.year}"></td>
+                                <td th:text="${car.licensePlate}"></td>
+                                <td th:text="${car.color ?: '-'}"></td>
+                                <td>
+                                    <strong th:if="${car.dailyRate != null}" 
+                                            th:text="${'R$ ' + #numbers.formatDecimal(car.dailyRate, 1, 2)}"></strong>
+                                    <span th:unless="${car.dailyRate != null}" class="text-muted">-</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-success">Disponível</span>
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a th:href="@{/cars/{id}(id=${car.id})}" 
+                                           class="btn btn-outline-primary">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a th:href="@{/orders/new(carId=${car.id})}" 
+                                           class="btn btn-primary"
+                                           th:if="${isClient}">
+                                            <i class="bi bi-plus-circle"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="row mt-5" th:unless="${cars.empty}">
+            <div class="col-12">
+                <div class="bg-light rounded p-4 text-center">
+                    <h5>Não encontrou o que procurava?</h5>
+                    <p class="text-muted mb-3">
+                        Entre em contato conosco para mais opções ou cadastre-se para receber notificações.
+                    </p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="/contact" class="btn btn-outline-primary">
+                            <i class="bi bi-envelope me-2"></i>
+                            Entrar em Contato
+                        </a>
+                        <a href="/register" class="btn btn-primary" th:unless="${isAuthenticated}">
+                            <i class="bi bi-person-plus me-2"></i>
+                            Cadastrar-se
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <th:block th:fragment="scripts-extra">
+        <script>
+            // View mode toggle
+            document.addEventListener('DOMContentLoaded', function() {
+                const gridViewRadio = document.getElementById('gridView');
+                const listViewRadio = document.getElementById('listView');
+                const gridContainer = document.getElementById('gridViewContainer');
+                const listContainer = document.getElementById('listViewContainer');
+                
+                function toggleView() {
+                    if (gridViewRadio.checked) {
+                        gridContainer.classList.remove('d-none');
+                        listContainer.classList.add('d-none');
+                    } else {
+                        gridContainer.classList.add('d-none');
+                        listContainer.classList.remove('d-none');
+                    }
+                }
+                
+                gridViewRadio.addEventListener('change', toggleView);
+                listViewRadio.addEventListener('change', toggleView);
+            });
+        </script>
+    </th:block>
+</body>
+</html>
+
