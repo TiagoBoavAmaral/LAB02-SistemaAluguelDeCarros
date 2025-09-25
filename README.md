@@ -46,7 +46,7 @@ Para executar este projeto em sua máquina local, siga os passos abaixo.
 1.  **Clone o repositório** (ou certifique-se de ter a pasta do projeto em sua máquina).
     ```bash
     # Exemplo:
-    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
+    git clone https://github.com/TiagoBoavAmaral/LAB02-SistemaAluguelDeCarros.git
     ```
 
 2.  **Navegue até a pasta raiz do projeto** (a pasta que contém o arquivo `pom.xml`).
