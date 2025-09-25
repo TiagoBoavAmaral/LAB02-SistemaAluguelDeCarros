@@ -127,7 +127,7 @@ src/main/resources/
 
 1. **Clone o repositório** (ou extraia o arquivo ZIP):
 ```bash
-git clone <url-do-repositorio>
+git clone <https://github.com/TiagoBoavAmaral/LAB02-SistemaAluguelDeCarros.git>
 cd sistema-aluguel-carros
 ```
 
