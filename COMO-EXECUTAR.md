@@ -67,6 +67,18 @@ Após iniciar, acesse: **http://localhost:8080**
 - **Cliente**: cliente@email.com / password
 - **Agente**: agente@email.com / password
 
+## 📁 Estrutura do Projeto
+```
+LAB02-SistemaAluguelDeCarros/
+├── run-windows.bat          # Script para Windows
+├── run-linux-mac.sh         # Script para Linux/macOS
+├── COMO-EXECUTAR.md         # Este arquivo
+└── rental-system/           # Projeto Spring Boot
+    ├── mvnw                 # Maven wrapper (Linux/macOS)
+    ├── mvnw.cmd             # Maven wrapper (Windows)
+    └── pom.xml              # Configuração Maven
+```
+
 ## 🔧 Solução de Problemas
 
 ### Erro: "Java não encontrado"
@@ -89,17 +101,6 @@ Após iniciar, acesse: **http://localhost:8080**
 - Verifique: `java -version`
 - Configure JAVA_HOME se necessário
 
-## 📁 Estrutura do Projeto
-```
-LAB02-SistemaAluguelDeCarros/
-├── run-windows.bat          # Script para Windows
-├── run-linux-mac.sh         # Script para Linux/macOS
-├── COMO-EXECUTAR.md         # Este arquivo
-└── rental-system/           # Projeto Spring Boot
-    ├── mvnw                 # Maven wrapper (Linux/macOS)
-    ├── mvnw.cmd             # Maven wrapper (Windows)
-    └── pom.xml              # Configuração Maven
-```
 
 ## 💡 Dicas
 
