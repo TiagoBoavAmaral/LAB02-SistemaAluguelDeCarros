@@ -6,6 +6,8 @@
 
 Este projeto é um sistema web para apoiar a gestão de aluguéis de automóveis, permitindo que clientes solicitem aluguéis e que agentes da empresa avaliem e processem esses pedidos. O sistema foi desenvolvido como parte do Laboratório de Desenvolvimento de Software da PUC Minas.
 
+Alunos: Tiago Boaventura Amaral e Kayque Allan Ribeiro Freitas
+
 ## 📋 Funcionalidades
 
 O protótipo atual implementa o fluxo principal do sistema, incluindo:
