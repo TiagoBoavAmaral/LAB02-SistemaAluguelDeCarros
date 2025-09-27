@@ -14,9 +14,8 @@ O protótipo atual implementa o fluxo principal do sistema, incluindo:
 * **Gestão de Pedidos pelo Cliente**: Usuários do tipo "Cliente" podem criar, modificar, consultar e cancelar seus pedidos de aluguel.
 * **Avaliação de Pedidos pelo Agente**: Usuários do tipo "Agente" (representando empresas ou bancos) podem visualizar todos os pedidos pendentes e realizar a análise financeira para aprová-los ou rejeitá-los.
 * **Persistência de Dados**: O sistema armazena informações sobre contratantes (clientes), automóveis e os próprios pedidos de aluguel.
-* **Interface Profissional**: Design responsivo com tema claro e corporativo, utilizando cores neutras e elementos visuais limpos para uma experiência de usuário profissional.
-* **Dashboard do Cliente**: Interface moderna com menu lateral e área principal mostrando resumo completo dos pedidos e estatísticas.
-* **Dashboard do Agente**: Interface profissional para agentes com visão geral de todos os pedidos e ferramentas de análise.
+* **Dashboard do Cliente**: Interface com menu lateral e área principal mostrando resumo completo dos pedidos e estatísticas.
+* **Dashboard do Agente**: Interface para agentes com visão geral de todos os pedidos e ferramentas de análise.
 * **Gestão de Veículos**: Sistema completo de cadastro, edição e exclusão de automóveis (apenas para agentes).
 
 ## 🛠️ Tecnologias Utilizadas
