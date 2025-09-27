@@ -4,7 +4,6 @@
 
 ### Java
 - **Java 17 ou superior** é obrigatório
-- Download: https://adoptium.net/
 
 ### Verificar se Java está instalado:
 ```bash
