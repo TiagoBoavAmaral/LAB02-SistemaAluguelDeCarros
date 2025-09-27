@@ -20,6 +20,7 @@ run-windows.bat
 
 ### Método 2: Manual
 ```cmd
+# Após baixar e extrair o projeto:
 # 1. Abrir PowerShell/CMD como Administrador
 # 2. Navegar para a pasta do projeto
 cd "C:\caminho\para\LAB02-SistemaAluguelDeCarros"
