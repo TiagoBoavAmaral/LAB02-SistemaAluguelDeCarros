@@ -4,54 +4,137 @@
   xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
   <head>
-    <title>Pedidos Pendentes</title>
+    <title>Pedidos Pendentes - Sistema de Aluguel de Carros</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
   </head>
   <body>
-    <h1>Pedidos Pendentes para Avaliação</h1>
-    <p>Agente: <span sec:authentication="name"></span></p>
-
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Cliente</th>
-          <th>Carro</th>
-          <th>Ação</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="pedido : ${pedidos}">
-          <td th:text="${pedido.id}"></td>
-          <td th:text="${pedido.cliente.nome}"></td>
-          <td
-            th:text="${pedido.automovel.marca} + ' ' + ${pedido.automovel.modelo}"
-          ></td>
-          <td>
-            <form
-              th:action="@{/pedidos/evaluate}"
-              method="post"
-              style="display: inline"
-            >
-              <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
-              <button type="submit" name="aprovar" value="true">Aprovar</button>
-            </form>
-            <form
-              th:action="@{/pedidos/evaluate}"
-              method="post"
-              style="display: inline"
-            >
-              <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
-              <button type="submit" name="aprovar" value="false">
-                Rejeitar
+    <div class="dashboard-container">
+      <!-- Menu Lateral -->
+      <nav class="sidebar">
+        <div class="sidebar-header">
+          <h2>Sistema de Aluguel</h2>
+          <p>Agente: <span sec:authentication="name"></span></p>
+        </div>
+        
+        <ul class="sidebar-menu">
+          <li class="menu-item">
+            <a th:href="@{/agente/dashboard}" class="menu-link">
+              <span class="menu-icon">📊</span>
+              Dashboard
+            </a>
+          </li>
+          <li class="menu-item">
+            <a th:href="@{/agente/dados}" class="menu-link">
+              <span class="menu-icon">👤</span>
+              Meus Dados
+            </a>
+          </li>
+          <li class="menu-item active">
+            <a href="#" class="menu-link">
+              <span class="menu-icon">⏳</span>
+              Pedidos Pendentes de Avaliação
+            </a>
+          </li>
+          <li class="menu-item">
+            <a th:href="@{/agente/todos-pedidos}" class="menu-link">
+              <span class="menu-icon">📋</span>
+              Todos os Pedidos
+            </a>
+          </li>
+          <li class="menu-item">
+            <a th:href="@{/agente/automoveis}" class="menu-link">
+              <span class="menu-icon">🚗</span>
+              Automóveis Cadastrados
+            </a>
+          </li>
+          <li class="menu-item logout">
+            <form th:action="@{/logout}" method="post" class="logout-form">
+              <button type="submit" class="menu-link logout-btn">
+                <span class="menu-icon">🚪</span>
+                Sair
               </button>
             </form>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <br />
-    <form th:action="@{/logout}" method="post">
-      <input type="submit" value="Sair" />
-    </form>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Conteúdo Principal -->
+      <main class="main-content">
+        <div class="content-header">
+          <h1>Pedidos Pendentes para Avaliação</h1>
+          <p>Analise e processe os pedidos de aluguel</p>
+        </div>
+
+        <div class="card">
+          <div th:if="${pedidos.empty}" class="alert alert-success">
+            <h3>Nenhum pedido pendente</h3>
+            <p>Todos os pedidos foram processados! Ótimo trabalho!</p>
+          </div>
+          
+          <div th:unless="${pedidos.empty}" class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Carro</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="pedido : ${pedidos}">
+                  <td th:text="${pedido.id}"></td>
+                  <td th:text="${pedido.cliente.nome}"></td>
+                  <td th:text="${pedido.automovel.marca} + ' ' + ${pedido.automovel.modelo}"></td>
+                  <td>
+                    <div class="action-buttons">
+                      <form
+                        th:action="@{/pedidos/evaluate}"
+                        method="post"
+                        class="form-inline"
+                      >
+                        <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
+                        <button type="submit" name="aprovar" value="true" class="btn btn-success">
+                          <span class="btn-icon">✅</span>
+                          Aprovar
+                        </button>
+                      </form>
+                      <form
+                        th:action="@{/pedidos/evaluate}"
+                        method="post"
+                        class="form-inline"
+                      >
+                        <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
+                        <button type="submit" name="aprovar" value="false" class="btn btn-danger">
+                          <span class="btn-icon">❌</span>
+                          Rejeitar
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="action-buttons">
+            <button onclick="location.reload()" class="btn btn-secondary">
+              <span class="btn-icon">🔄</span>
+              Atualizar Lista
+            </button>
+            <a th:href="@{/agente/dashboard}" class="btn btn-secondary">
+              <span class="btn-icon">📊</span>
+              Voltar ao Dashboard
+            </a>
+            <a th:href="@{/agente/todos-pedidos}" class="btn btn-secondary">
+              <span class="btn-icon">📋</span>
+              Ver Todos os Pedidos
+            </a>
+          </div>
+        </div>
+      </main>
+    </div>
   </body>
 </html>

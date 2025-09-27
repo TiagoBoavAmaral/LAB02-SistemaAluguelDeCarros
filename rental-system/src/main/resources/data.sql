@@ -8,5 +8,8 @@ INSERT INTO users (id, email, password, role) VALUES (2, 'agente@email.com', '$2
 INSERT INTO agente (id, nome_empresa) VALUES (2, 'Banco Fictício S/A');
 
 -- Inserir Automóveis
-INSERT INTO automovel (id, matricula, ano, marca, modelo, placa) VALUES (101, 'MAT01', 2023, 'Fiat', 'Mobi', 'ABC-1234');
-INSERT INTO automovel (id, matricula, ano, marca, modelo, placa) VALUES (102, 'MAT02', 2024, 'Chevrolet', 'Onix', 'DEF-5678');
+INSERT INTO automovel (id, matricula, ano, marca, modelo, placa, cor) VALUES (101, 'MAT01', 2023, 'Fiat', 'Mobi', 'ABC-1234', 'Branco');
+INSERT INTO automovel (id, matricula, ano, marca, modelo, placa, cor) VALUES (102, 'MAT02', 2024, 'Chevrolet', 'Onix', 'DEF-5678', 'Prata');
+INSERT INTO automovel (id, matricula, ano, marca, modelo, placa, cor) VALUES (103, 'MAT03', 2023, 'Volkswagen', 'Golf', 'GHI-9012', 'Azul');
+INSERT INTO automovel (id, matricula, ano, marca, modelo, placa, cor) VALUES (104, 'MAT04', 2024, 'Ford', 'Ka', 'JKL-3456', 'Vermelho');
+INSERT INTO automovel (id, matricula, ano, marca, modelo, placa, cor) VALUES (105, 'MAT05', 2023, 'Honda', 'Civic', 'MNO-7890', 'Preto');

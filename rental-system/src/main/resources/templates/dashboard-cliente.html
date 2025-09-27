@@ -4,7 +4,7 @@
   xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
   <head>
-    <title>Meus Pedidos - Sistema de Aluguel de Carros</title>
+    <title>Dashboard - Sistema de Aluguel de Carros</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -19,8 +19,8 @@
         </div>
         
         <ul class="sidebar-menu">
-          <li class="menu-item">
-            <a th:href="@{/cliente/dashboard}" class="menu-link">
+          <li class="menu-item active">
+            <a href="#" class="menu-link">
               <span class="menu-icon">📊</span>
               Dashboard
             </a>
@@ -37,8 +37,8 @@
               Automóveis Disponíveis
             </a>
           </li>
-          <li class="menu-item active">
-            <a href="#" class="menu-link">
+          <li class="menu-item">
+            <a th:href="@{/pedidos/mine}" class="menu-link">
               <span class="menu-icon">📋</span>
               Meus Pedidos
             </a>
@@ -63,31 +63,75 @@
       <!-- Conteúdo Principal -->
       <main class="main-content">
         <div class="content-header">
-          <h1>Meus Pedidos de Aluguel</h1>
-          <p>Visualize todos os seus pedidos de aluguel</p>
+          <h1>Dashboard do Cliente</h1>
+          <p>Visão geral dos seus pedidos de aluguel</p>
         </div>
 
-        <div class="card">
-          <div th:if="${pedidos.empty}" class="alert alert-success">
-            <h3>Nenhum pedido encontrado</h3>
-            <p>Você ainda não fez nenhum pedido de aluguel. Que tal começar agora?</p>
+        <!-- Cards de Resumo -->
+        <div class="dashboard-cards">
+          <div class="summary-card">
+            <div class="card-icon total">
+              <span>📊</span>
+            </div>
+            <div class="card-content">
+              <h3 th:text="${totalPedidos}">0</h3>
+              <p>Total de Pedidos</p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="card-icon active">
+              <span>✅</span>
+            </div>
+            <div class="card-content">
+              <h3 th:text="${pedidosAtivos}">0</h3>
+              <p>Pedidos Ativos</p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="card-icon cancelled">
+              <span>❌</span>
+            </div>
+            <div class="card-content">
+              <h3 th:text="${pedidosRejeitados}">0</h3>
+              <p>Pedidos Rejeitados</p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="card-icon pending">
+              <span>⏳</span>
+            </div>
+            <div class="card-content">
+              <h3 th:text="${pedidosPendentes}">0</h3>
+              <p>Pedidos Pendentes</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabela de Pedidos Recentes -->
+        <div class="recent-orders">
+          <div class="section-header">
+            <h2>Pedidos Recentes</h2>
+            <a th:href="@{/pedidos/mine}" class="btn btn-outline">Ver Todos</a>
           </div>
           
-          <div th:unless="${pedidos.empty}" class="table-container">
+          <div class="table-container">
             <table>
               <thead>
                 <tr>
                   <th>ID</th>
                   <th>Carro</th>
-                  <th>Data do Pedido</th>
+                  <th>Data</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="pedido : ${pedidos}">
+                <tr th:each="pedido : ${pedidosRecentes}">
                   <td th:text="${pedido.id}"></td>
                   <td th:text="${pedido.automovel.marca} + ' ' + ${pedido.automovel.modelo}"></td>
-                  <td th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')}"></td>
+                  <td th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy')}"></td>
                   <td>
                     <span 
                       th:class="'status-badge status-' + ${pedido.status.name().toLowerCase()}"
@@ -95,18 +139,32 @@
                     ></span>
                   </td>
                 </tr>
+                <tr th:if="${pedidosRecentes.empty}">
+                  <td colspan="4" class="text-center">Nenhum pedido encontrado</td>
+                </tr>
               </tbody>
             </table>
           </div>
+        </div>
+
+        <!-- Ações Rápidas -->
+        <div class="quick-actions">
+          <div class="section-header">
+            <h2>Ações Rápidas</h2>
+          </div>
           
           <div class="action-buttons">
-            <a th:href="@{/pedidos/new}" class="btn btn-success">
+            <a th:href="@{/pedidos/new}" class="btn btn-primary">
               <span class="btn-icon">➕</span>
-              Fazer Novo Pedido
+              Novo Pedido
             </a>
-            <a th:href="@{/cliente/dashboard}" class="btn btn-secondary">
-              <span class="btn-icon">📊</span>
-              Voltar ao Dashboard
+            <a th:href="@{/pedidos/mine}" class="btn btn-secondary">
+              <span class="btn-icon">📋</span>
+              Ver Meus Pedidos
+            </a>
+            <a th:href="@{/cliente/automoveis}" class="btn btn-secondary">
+              <span class="btn-icon">🚗</span>
+              Ver Automóveis
             </a>
           </div>
         </div>

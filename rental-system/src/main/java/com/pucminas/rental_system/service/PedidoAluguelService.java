@@ -44,4 +44,8 @@ public class PedidoAluguelService {
     public List<PedidoAluguel> findPedidosPendentes() {
         return pedidoRepository.findByStatus(PedidoAluguel.PedidoStatus.PENDENTE);
     }
+    
+    public List<PedidoAluguel> findAllPedidos() {
+        return pedidoRepository.findAll();
+    }
 }

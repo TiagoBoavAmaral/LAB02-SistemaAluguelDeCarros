@@ -23,9 +23,9 @@ public class PedidoAluguelController {
     public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User user = userRepository.findByEmail(userDetails.getUsername());
         if ("ROLE_AGENTE".equals(user.getRole())) {
-            return "redirect:/pedidos/pending";
+            return "redirect:/agente/dashboard";
         }
-        return "redirect:/pedidos/mine";
+        return "redirect:/cliente/dashboard";
     }
 
     @GetMapping("/mine")
