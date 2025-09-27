@@ -3,6 +3,8 @@
 ![Java](https://img.shields.io/badge/Java-17+-blue?style=for-the-badge&logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.1.5-success?style=for-the-badge&logo=spring)
 ![Maven](https://img.shields.io/badge/Maven-4.0.0-red?style=for-the-badge&logo=apache-maven)
+![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=for-the-badge&logo=css3)
 
 Este projeto é um sistema web para apoiar a gestão de aluguéis de automóveis, permitindo que clientes solicitem aluguéis e que agentes da empresa avaliem e processem esses pedidos. O sistema foi desenvolvido como parte do Laboratório de Desenvolvimento de Software da PUC Minas.
 
