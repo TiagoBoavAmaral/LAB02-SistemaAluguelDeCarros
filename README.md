@@ -77,23 +77,10 @@ O banco de dados é inicializado com dois usuários de teste para demonstrar o f
 #### 2. **Login como Cliente**:
 * **Email**: `cliente@email.com`
 * **Senha**: `password`
-* **Ações**:
-    1.  Clique em "Fazer Novo Pedido".
-    2.  Selecione um carro e envie o pedido.
-    3.  Verifique se o novo pedido aparece na lista com o status "PENDENTE".
-    4.  Faça logout.
 
 #### 3. **Login como Agente**:
 * **Email**: `agente@email.com`
 * **Senha**: `password`
-* **Ações**:
-    1.  Você verá o pedido criado pelo cliente na lista de "Pedidos Pendentes".
-    2.  Clique no botão "Aprovar". O pedido deverá sumir da lista.
-    3.  Faça logout.
-
-#### 4. **Verificação Final**:
-* Faça login novamente como **Cliente**.
-* Verifique se o status do seu pedido foi atualizado para **"APROVADO"**.
 
 #### Acesso ao Banco de Dados H2
 Para inspecionar os dados diretamente:
@@ -111,47 +98,3 @@ O código está organizado seguindo as camadas da arquitetura MVC, conforme a es
 * `com.pucminas.rental_system.model`: Entidades JPA que representam os dados do sistema.
 * `com.pucminas.rental_system.repository`: Interfaces do Spring Data JPA para acesso ao banco de dados.
 * `com.pucminas.rental_system.service`: Classes que contêm a lógica de negócio do sistema.
-
-## 🎨 Melhorias de Design
-
-O sistema foi aprimorado com um design profissional e responsivo que inclui:
-
-### ✨ Características Visuais
-- **Tema Claro**: Interface com cores neutras e design corporativo
-- **Paleta Profissional**: Uso de azuis, cinzas e brancos para um visual sério
-- **Animações Sutis**: Transições suaves e efeitos hover discretos
-- **Design Responsivo**: Adaptação automática para diferentes tamanhos de tela
-- **Tipografia Profissional**: Uso da fonte Segoe UI para melhor legibilidade
-
-### 🎯 Elementos de Interface
-- **Cards Limpos**: Containers com bordas sutis e sombras discretas
-- **Botões Corporativos**: Design limpo com cores padrão do Bootstrap
-- **Tabelas Profissionais**: Layout organizado com hover effects e status badges
-- **Formulários Elegantes**: Campos de entrada com focus states e validação visual
-- **Alertas Informativos**: Mensagens de sucesso e erro com cores apropriadas
-
-### 📱 Responsividade
-- **Mobile-First**: Design otimizado para dispositivos móveis
-- **Breakpoints**: Adaptação para tablets e desktops
-- **Navegação Flexível**: Menu e botões que se adaptam ao espaço disponível
-
-### 🎛️ Dashboard do Cliente
-- **Menu Lateral**: Navegação intuitiva com todas as funcionalidades
-- **Cards de Resumo**: Estatísticas visuais dos pedidos (total, ativos, rejeitados, pendentes)
-- **Tabela de Pedidos Recentes**: Visualização rápida dos últimos pedidos
-- **Ações Rápidas**: Botões para acesso direto às principais funcionalidades
-- **Páginas Especializadas**: Meus Dados e Automóveis Disponíveis com layouts otimizados
-
-### 🎛️ Dashboard do Agente
-- **Menu Lateral Profissional**: Navegação específica para agentes
-- **Cards de Resumo**: Estatísticas de todos os pedidos (pendentes, aprovados, rejeitados, total)
-- **Tabela de Pedidos Recentes**: Visualização de todos os pedidos do sistema
-- **Páginas Especializadas**: Meus Dados, Todos os Pedidos e Automóveis Cadastrados
-- **Ferramentas de Análise**: Acesso direto à avaliação de pedidos pendentes
-
-### 🚗 Gestão de Veículos (Apenas Agentes)
-- **Cadastro de Veículos**: Formulário completo com validações (Matrícula, Ano, Marca, Modelo, Placa, Cor)
-- **Edição de Veículos**: Atualização de dados existentes com formulário pré-preenchido
-- **Exclusão de Veículos**: Remoção com confirmação de segurança
-- **Validações**: Campos obrigatórios, formato de placa, faixa de anos válida
-- **Interface Responsiva**: Formulários adaptados para mobile e desktop
