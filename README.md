@@ -39,55 +39,8 @@ Este projeto foi construído utilizando as seguintes tecnologias, conforme a esp
 
 ## 🚀 Como Executar o Projeto
 
-Para executar este projeto em sua máquina local, siga os passos abaixo.
+Para instruções detalhadas sobre como executar o projeto, consulte o arquivo [COMO-EXECUTAR.md](COMO-EXECUTAR.md).
 
-### Pré-requisitos
-
-* **JDK 17** ou superior instalado.
-* **Apache Maven** instalado e configurado no PATH do sistema.
-
-### Passos para Execução
-
-1.  **Clone o repositório** (ou certifique-se de ter a pasta do projeto em sua máquina).
-    ```bash
-    git clone https://github.com/TiagoBoavAmaral/LAB02-SistemaAluguelDeCarros.git
-    ```
-
-2.  **Navegue até a pasta raiz do projeto** (a pasta que contém o arquivo `pom.xml`).
-    ```bash
-    cd rental-system
-    ```
-
-3.  **Execute o projeto usando o Maven**:
-    ```bash
-    mvn spring-boot:run
-    ```
-
-    Alternativamente, você pode importar o projeto em sua IDE preferida (IntelliJ IDEA, Eclipse, VS Code) e executar a classe principal `RentalSystemApplication.java`.
-
-4.  **Acesse a aplicação**: Após a inicialização, o sistema estará disponível em `http://localhost:8080`.
-
-## 🧪 Como Testar a Aplicação
-
-O banco de dados é inicializado com dois usuários de teste para demonstrar o fluxo completo.
-
-#### 1. **Acesse a tela de login**:
-* Abra o navegador e acesse: `http://localhost:8080`
-
-#### 2. **Login como Cliente**:
-* **Email**: `cliente@email.com`
-* **Senha**: `password`
-
-#### 3. **Login como Agente**:
-* **Email**: `agente@email.com`
-* **Senha**: `password`
-
-#### Acesso ao Banco de Dados H2
-Para inspecionar os dados diretamente:
-* **URL**: `http://localhost:8080/h2-console`
-* **JDBC URL**: `jdbc:h2:mem:rentalsystemdb`
-* **User Name**: `sa`
-* **Password**: `password`
 
 ## 🏛️ Estrutura do Projeto
 
