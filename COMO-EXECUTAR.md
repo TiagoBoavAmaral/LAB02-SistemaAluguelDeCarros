@@ -67,6 +67,13 @@ Após iniciar, acesse: **http://localhost:8080**
 - **Cliente**: cliente@email.com / password
 - **Agente**: agente@email.com / password
 
+### Acesso ao Banco de Dados H2
+Para inspecionar os dados diretamente:
+* **URL**: `http://localhost:8080/h2-console`
+* **JDBC URL**: `jdbc:h2:mem:rentalsystemdb`
+* **User Name**: `sa`
+* **Password**: `password`
+
 ## 📁 Estrutura do Projeto
 ```
 LAB02-SistemaAluguelDeCarros/
