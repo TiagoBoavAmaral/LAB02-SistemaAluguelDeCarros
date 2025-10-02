@@ -5,9 +5,9 @@
 >
   <head>
     <title>Dashboard - Sistema de Aluguel de Carros</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
   </head>
   <body>
     <div class="dashboard-container">
@@ -17,7 +17,7 @@
           <h2>Sistema de Aluguel</h2>
           <p>Bem-vindo, <span sec:authentication="name"></span></p>
         </div>
-        
+
         <ul class="sidebar-menu">
           <li class="menu-item active">
             <a href="#" class="menu-link">
@@ -108,6 +108,18 @@
               <p>Pedidos Pendentes</p>
             </div>
           </div>
+
+          <div class="summary-card">
+            <div class="card-icon total-spent">
+              <span>💸</span>
+            </div>
+            <div class="card-content">
+              <h3 th:text="${#numbers.formatCurrency(totalGastoAtualmente)}">
+                R$ 0,00
+              </h3>
+              <p>Total Gasto Atualmente</p>
+            </div>
+          </div>
         </div>
 
         <!-- Tabela de Pedidos Recentes -->
@@ -116,7 +128,7 @@
             <h2>Pedidos Recentes</h2>
             <a th:href="@{/pedidos/mine}" class="btn btn-outline">Ver Todos</a>
           </div>
-          
+
           <div class="table-container">
             <table>
               <thead>
@@ -130,17 +142,23 @@
               <tbody>
                 <tr th:each="pedido : ${pedidosRecentes}">
                   <td th:text="${pedido.id}"></td>
-                  <td th:text="${pedido.automovel.marca} + ' ' + ${pedido.automovel.modelo}"></td>
-                  <td th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy')}"></td>
+                  <td
+                    th:text="${pedido.automovel.marca} + ' ' + ${pedido.automovel.modelo}"
+                  ></td>
+                  <td
+                    th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy')}"
+                  ></td>
                   <td>
-                    <span 
+                    <span
                       th:class="'status-badge status-' + ${pedido.status.name().toLowerCase()}"
                       th:text="${pedido.status.name()}"
                     ></span>
                   </td>
                 </tr>
                 <tr th:if="${pedidosRecentes.empty}">
-                  <td colspan="4" class="text-center">Nenhum pedido encontrado</td>
+                  <td colspan="4" class="text-center">
+                    Nenhum pedido encontrado
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -152,7 +170,7 @@
           <div class="section-header">
             <h2>Ações Rápidas</h2>
           </div>
-          
+
           <div class="action-buttons">
             <a th:href="@{/pedidos/new}" class="btn btn-primary">
               <span class="btn-icon">➕</span>

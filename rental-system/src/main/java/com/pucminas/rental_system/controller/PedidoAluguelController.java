@@ -50,9 +50,12 @@ public class PedidoAluguelController {
     }
 
     @PostMapping("/new")
-    public String createPedido(@RequestParam Long automovelId, @AuthenticationPrincipal UserDetails userDetails) {
+    public String createPedido(@RequestParam Long automovelId,
+                               @RequestParam String dataRetirada,
+                               @RequestParam String dataDevolucao,
+                               @AuthenticationPrincipal UserDetails userDetails) {
         Cliente cliente = (Cliente) userRepository.findByEmail(userDetails.getUsername());
-        pedidoService.criarPedido(cliente.getId(), automovelId);
+        pedidoService.criarPedido(cliente.getId(), automovelId, dataRetirada, dataDevolucao);
         return "redirect:/pedidos/mine";
     }
     

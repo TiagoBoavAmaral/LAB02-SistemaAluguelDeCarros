@@ -8,4 +8,5 @@ import java.util.List;
 public interface PedidoAluguelRepository extends JpaRepository<PedidoAluguel, Long> {
     List<PedidoAluguel> findByCliente(Cliente cliente);
     List<PedidoAluguel> findByStatus(PedidoAluguel.PedidoStatus status);
+    List<PedidoAluguel> findByClienteAndStatusIn(Cliente cliente, List<PedidoAluguel.PedidoStatus> statuses);
 }

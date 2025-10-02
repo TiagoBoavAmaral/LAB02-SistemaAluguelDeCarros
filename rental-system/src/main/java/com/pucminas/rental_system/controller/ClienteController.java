@@ -36,6 +36,9 @@ public class ClienteController {
             .filter(p -> p.getStatus() == PedidoAluguel.PedidoStatus.PENDENTE)
             .count();
         
+        // Calcular valor total de pedidos ativos
+        double totalGastoAtualmente = pedidoService.calcularValorTotalPedidosAtivos(cliente);
+
         // Pegar os 5 pedidos mais recentes
         List<PedidoAluguel> pedidosRecentes = todosPedidos.stream()
             .sorted((p1, p2) -> p2.getDataPedido().compareTo(p1.getDataPedido()))
@@ -46,6 +49,7 @@ public class ClienteController {
         model.addAttribute("pedidosAtivos", pedidosAtivos);
         model.addAttribute("pedidosRejeitados", pedidosRejeitados);
         model.addAttribute("pedidosPendentes", pedidosPendentes);
+        model.addAttribute("totalGastoAtualmente", totalGastoAtualmente);
         model.addAttribute("pedidosRecentes", pedidosRecentes);
         
         return "dashboard-cliente";

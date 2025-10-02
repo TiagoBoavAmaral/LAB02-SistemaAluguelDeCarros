@@ -5,9 +5,9 @@
 >
   <head>
     <title>Pedidos Pendentes - Sistema de Aluguel de Carros</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
   </head>
   <body>
     <div class="dashboard-container">
@@ -17,7 +17,7 @@
           <h2>Sistema de Aluguel</h2>
           <p>Agente: <span sec:authentication="name"></span></p>
         </div>
-        
+
         <ul class="sidebar-menu">
           <li class="menu-item">
             <a th:href="@{/agente/dashboard}" class="menu-link">
@@ -72,7 +72,7 @@
             <h3>Nenhum pedido pendente</h3>
             <p>Todos os pedidos foram processados! Ótimo trabalho!</p>
           </div>
-          
+
           <div th:unless="${pedidos.empty}" class="table-container">
             <table>
               <thead>
@@ -80,6 +80,10 @@
                   <th>ID</th>
                   <th>Cliente</th>
                   <th>Carro</th>
+                  <th>Data do Pedido</th>
+                  <th>Data Retirada</th>
+                  <th>Data Devolução</th>
+                  <th>Valor Total</th>
                   <th>Ações</th>
                 </tr>
               </thead>
@@ -87,16 +91,45 @@
                 <tr th:each="pedido : ${pedidos}">
                   <td th:text="${pedido.id}"></td>
                   <td th:text="${pedido.cliente.nome}"></td>
-                  <td th:text="${pedido.automovel.marca} + ' ' + ${pedido.automovel.modelo}"></td>
+                  <td
+                    th:text="${pedido.automovel.marca} + ' ' + ${pedido.automovel.modelo}"
+                  ></td>
+                  <td
+                    th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')}"
+                  ></td>
+                  <td
+                    th:text="${#temporals.format(pedido.dataRetirada, 'dd/MM/yyyy HH:mm')}"
+                  ></td>
+                  <td
+                    th:text="${#temporals.format(pedido.dataDevolucao, 'dd/MM/yyyy HH:mm')}"
+                  ></td>
+                  <td
+                    th:text="${#numbers.formatCurrency(pedido.valorTotal)}"
+                  ></td>
                   <td>
                     <div class="action-buttons">
+                      <a
+                        th:href="@{/agente/clientes/{id}(id=${pedido.cliente.id})}"
+                        class="btn btn-info btn-sm"
+                      >
+                        <span class="btn-icon">👤</span> Ver Cliente
+                      </a>
                       <form
                         th:action="@{/pedidos/evaluate}"
                         method="post"
                         class="form-inline"
                       >
-                        <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
-                        <button type="submit" name="aprovar" value="true" class="btn btn-success">
+                        <input
+                          type="hidden"
+                          name="pedidoId"
+                          th:value="${pedido.id}"
+                        />
+                        <button
+                          type="submit"
+                          name="aprovar"
+                          value="true"
+                          class="btn btn-success"
+                        >
                           <span class="btn-icon">✅</span>
                           Aprovar
                         </button>
@@ -106,8 +139,17 @@
                         method="post"
                         class="form-inline"
                       >
-                        <input type="hidden" name="pedidoId" th:value="${pedido.id}" />
-                        <button type="submit" name="aprovar" value="false" class="btn btn-danger">
+                        <input
+                          type="hidden"
+                          name="pedidoId"
+                          th:value="${pedido.id}"
+                        />
+                        <button
+                          type="submit"
+                          name="aprovar"
+                          value="false"
+                          class="btn btn-danger"
+                        >
                           <span class="btn-icon">❌</span>
                           Rejeitar
                         </button>
@@ -118,7 +160,7 @@
               </tbody>
             </table>
           </div>
-          
+
           <div class="action-buttons">
             <button onclick="location.reload()" class="btn btn-secondary">
               <span class="btn-icon">🔄</span>

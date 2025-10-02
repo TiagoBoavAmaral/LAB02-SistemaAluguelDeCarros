@@ -18,6 +18,9 @@ public class PedidoAluguel {
     private Automovel automovel;
 
     private LocalDateTime dataPedido;
+    private LocalDateTime dataRetirada;
+    private LocalDateTime dataDevolucao;
+    private double valorTotal;
     
     @Enumerated(EnumType.STRING)
     private PedidoStatus status;
@@ -39,6 +42,12 @@ public class PedidoAluguel {
     public void setAutomovel(Automovel automovel) { this.automovel = automovel; }
     public LocalDateTime getDataPedido() { return dataPedido; }
     public void setDataPedido(LocalDateTime dataPedido) { this.dataPedido = dataPedido; }
+    public LocalDateTime getDataRetirada() { return dataRetirada; }
+    public void setDataRetirada(LocalDateTime dataRetirada) { this.dataRetirada = dataRetirada; }
+    public LocalDateTime getDataDevolucao() { return dataDevolucao; }
+    public void setDataDevolucao(LocalDateTime dataDevolucao) { this.dataDevolucao = dataDevolucao; }
+    public double getValorTotal() { return valorTotal; }
+    public void setValorTotal(double valorTotal) { this.valorTotal = valorTotal; }
     public PedidoStatus getStatus() { return status; }
     public void setStatus(PedidoStatus status) { this.status = status; }
     public Agente getAgente() { return agente; }

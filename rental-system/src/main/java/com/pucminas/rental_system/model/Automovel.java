@@ -13,6 +13,7 @@ public class Automovel {
     private String modelo;
     private String placa;
     private String cor;
+    private double valorAluguelDiario;
 
     // Getters and Setters
     public Long getId() { return id; }
@@ -29,4 +30,6 @@ public class Automovel {
     public void setPlaca(String placa) { this.placa = placa; }
     public String getCor() { return cor; }
     public void setCor(String cor) { this.cor = cor; }
+    public double getValorAluguelDiario() { return valorAluguelDiario; }
+    public void setValorAluguelDiario(double valorAluguelDiario) { this.valorAluguelDiario = valorAluguelDiario; }
 }

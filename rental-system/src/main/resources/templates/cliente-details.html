@@ -4,7 +4,7 @@
   xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
   <head>
-    <title>Todos os Pedidos - Sistema de Aluguel de Carros</title>
+    <title>Detalhes do Cliente - Sistema de Aluguel de Carros</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
@@ -37,8 +37,8 @@
               Pedidos Pendentes de Avaliação
             </a>
           </li>
-          <li class="menu-item active">
-            <a href="#" class="menu-link">
+          <li class="menu-item">
+            <a th:href="@{/agente/todos-pedidos}" class="menu-link">
               <span class="menu-icon">📋</span>
               Todos os Pedidos
             </a>
@@ -63,50 +63,61 @@
       <!-- Conteúdo Principal -->
       <main class="main-content">
         <div class="content-header">
-          <h1>Todos os Pedidos</h1>
-          <p>Visualize todos os pedidos de aluguel do sistema</p>
+          <h1>Detalhes do Cliente</h1>
+          <p>Informações completas do cliente</p>
         </div>
 
         <div class="card">
-          <div th:if="${pedidos.empty}" class="alert alert-success">
-            <h3>Nenhum pedido encontrado</h3>
-            <p>Não há pedidos cadastrados no sistema.</p>
+          <h2 class="card-title">Dados de Identificação</h2>
+          <div class="detail-group">
+            <p>
+              <strong>Nome:</strong> <span th:text="${cliente.nome}"></span>
+            </p>
+            <p><strong>RG:</strong> <span th:text="${cliente.rg}"></span></p>
+            <p><strong>CPF:</strong> <span th:text="${cliente.cpf}"></span></p>
+            <p>
+              <strong>Endereço:</strong>
+              <span th:text="${cliente.endereco}"></span>
+            </p>
+            <p>
+              <strong>Profissão:</strong>
+              <span th:text="${cliente.profissao}"></span>
+            </p>
           </div>
 
-          <div th:unless="${pedidos.empty}" class="table-container">
+          <h2 class="card-title mt-4">Gastos Atuais em Aluguéis</h2>
+          <div class="detail-group">
+            <p>
+              <strong>Total Gasto Atualmente:</strong>
+              <span th:text="${#numbers.formatCurrency(totalGastoAtualmente)}"
+                >R$ 0,00</span
+              >
+            </p>
+          </div>
+
+          <h2 class="card-title mt-4">Carros Atualmente Alugados</h2>
+          <div th:if="${pedidosAtivos.empty}" class="alert alert-info">
+            Nenhum carro alugado no momento por este cliente.
+          </div>
+          <div th:unless="${pedidosAtivos.empty}" class="table-container">
             <table>
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Cliente</th>
-                  <th>Carro</th>
-                  <th>Data do Pedido</th>
-                  <th>Status</th>
-                  <th>Agente Responsável</th>
+                  <th>Marca</th>
+                  <th>Modelo</th>
+                  <th>Placa</th>
+                  <th>Valor Diário</th>
                   <th>Data Retirada</th>
                   <th>Data Devolução</th>
-                  <th>Valor Total</th>
-                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="pedido : ${pedidos}">
-                  <td th:text="${pedido.id}"></td>
-                  <td th:text="${pedido.cliente.nome}"></td>
+                <tr th:each="pedido : ${pedidosAtivos}">
+                  <td th:text="${pedido.automovel.marca}"></td>
+                  <td th:text="${pedido.automovel.modelo}"></td>
+                  <td th:text="${pedido.automovel.placa}"></td>
                   <td
-                    th:text="${pedido.automovel.marca} + ' ' + ${pedido.automovel.modelo}"
-                  ></td>
-                  <td
-                    th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')}"
-                  ></td>
-                  <td>
-                    <span
-                      th:class="'status-badge status-' + ${pedido.status.name().toLowerCase()}"
-                      th:text="${pedido.status.name()}"
-                    ></span>
-                  </td>
-                  <td
-                    th:text="${pedido.agente != null ? pedido.agente.nomeEmpresa : 'N/A'}"
+                    th:text="${#numbers.formatCurrency(pedido.automovel.valorAluguelDiario)}"
                   ></td>
                   <td
                     th:text="${#temporals.format(pedido.dataRetirada, 'dd/MM/yyyy HH:mm')}"
@@ -114,30 +125,19 @@
                   <td
                     th:text="${#temporals.format(pedido.dataDevolucao, 'dd/MM/yyyy HH:mm')}"
                   ></td>
-                  <td
-                    th:text="${#numbers.formatCurrency(pedido.valorTotal)}"
-                  ></td>
-                  <td>
-                    <a
-                      th:href="@{/agente/clientes/{id}(id=${pedido.cliente.id})}"
-                      class="btn btn-info btn-sm"
-                    >
-                      <span class="btn-icon">👤</span> Ver Cliente
-                    </a>
-                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <div class="action-buttons">
-            <a th:href="@{/pedidos/pending}" class="btn btn-primary">
-              <span class="btn-icon">⏳</span>
-              Avaliar Pedidos Pendentes
+          <div class="action-buttons mt-4">
+            <a th:href="@{/agente/todos-pedidos}" class="btn btn-secondary">
+              <span class="btn-icon">📋</span>
+              Voltar para Todos os Pedidos
             </a>
-            <a th:href="@{/agente/dashboard}" class="btn btn-secondary">
-              <span class="btn-icon">📊</span>
-              Voltar ao Dashboard
+            <a th:href="@{/pedidos/pending}" class="btn btn-secondary">
+              <span class="btn-icon">⏳</span>
+              Voltar para Pedidos Pendentes
             </a>
           </div>
         </div>
